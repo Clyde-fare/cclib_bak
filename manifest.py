@@ -38,7 +38,9 @@ for folder in folders:
         files.extend(glob.glob(os.path.join(basicfolder, "*")))
 
 # Include test scripts
+files.extend(glob.glob(os.path.join("test", "regression.py")))
 files.extend(glob.glob(os.path.join("test", "test*.py")))
+files.append(os.path.join("test", "__init__.py"))
 for name in ['bettertest', 'methods']:
     files.append(os.path.join("test", "%s.py" % name))
 files.append(os.path.join("test", "testdata"))
@@ -47,4 +49,4 @@ for f in files:
     if not os.path.isfile(f):
         print "%s does not exist" % f
 
-print >> open("MANIFEST","w"), "\n".join(files)
+print("\n".join(files), file=open("MANIFEST", "w"))
