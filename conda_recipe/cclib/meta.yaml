@@ -1,0 +1,27 @@
+package:
+  name: chemnotebook_cclib
+  version: 1.2
+
+build:
+  number: 0
+
+source:
+  git_url: https://github.com/Clyde-fare/cclib
+  
+requirements:
+  build:
+    - python
+    - numpy
+
+  run:
+    - python
+    - numpy
+
+test:
+  imports:
+    - cclib
+
+about:
+  home: http://cclib.sourceforge.net/wiki/index.php/Main_Page
+  license: GNU Lesser General Public License version 3 (LGPL)
+
