@@ -10,24 +10,23 @@
 
 __revision__ = "$Revision$"
 
-
+import ase.units
 def convertor(value, fromunits, tounits):
     """Convert from one set of units to another.
 
     >>> print "%.1f" % convertor(8, "eV", "cm-1")
-    64524.8
+    64524.3
     """
-    
-    _convertor = {"eV_to_cm-1": lambda x: x*8065.6,
-                  "eV_to_kJmol-1": lambda x: x*96.48538,
-                  "hartree_to_eV": lambda x: x*27.2113845,
-                  "Hartree_to_ kJmol-1": lambda x: x*2625.5002,
-                  "bohr_to_Angstrom": lambda x: x*0.529177,
-                  "Angstrom_to_bohr": lambda x: x*1.889716,
+
+    _convertor = {"eV_to_cm-1": lambda x: x/(units.J*units._c * units._hplanck* 100),
+                  "eV_to_kJmol-1": lambda x: x*units.mol/units.kJ,
+                  "hartree_to_eV": lambda x: x*units.Hartree,
+                  "bohr_to_Angstrom": lambda x: x*units.Bohr,
+                  "Angstrom_to_bohr": lambda x: x/units.Bohr,
                   "nm_to_cm-1": lambda x: 1e7/x,
                   "cm-1_to_nm": lambda x: 1e7/x,
-                  "hartree_to_cm-1": lambda x: x*219474.6,
-                  # Taken from GAMESS docs, "Further information",
+                  "hartree_to_cm-1": lambda x: x*units.Hartree/(units.J*units._c * units._hplanck* 100),
+                  # Taken from ase.units otherwise from GAMESS docs, "Further information",
                   # "Molecular Properties and Conversion Factors"
                   "Debye^2/amu-Angstrom^2_to_km/mol": lambda x: x*42.255}
 
