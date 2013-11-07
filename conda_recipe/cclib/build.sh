@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir cclib
+cp -r "$RECIPE_DIR/../../" cclib
+cd cclib
 $PYTHON setup.py install
 
 # Add more build steps here, if they are necessary.

@@ -347,7 +347,7 @@ class Gaussian(logfileparser.Logfile):
 
         # Note: this needs to follow the section where 'SCF Done' is used
         #   to terminate a loop when extracting SCF convergence information.
-        if line[1:9] == 'SCF Done':
+        if line[1:9] == 'SCF Done' and not self.oniom:
 
             if not hasattr(self, "scfenergies"):
                 self.scfenergies = []
@@ -356,11 +356,18 @@ class Gaussian(logfileparser.Logfile):
         # gmagoon 5/27/09: added scfenergies reading for PM3 case
         # Example line: " Energy=   -0.077520562724 NIter=  14."
         # See regression Gaussian03/QVGXLLKOCUKJST-UHFFFAOYAJmult3Fixed.out
-        if line[1:8] == 'Energy=':
+        if line[1:8] == 'Energy=' and not self.oniom:
             if not hasattr(self, "scfenergies"):
                 self.scfenergies = []
             self.scfenergies.append(utils.convertor(self.float(line.split()[1]), "hartree", "eV"))
         
+        # cfare 7/11/13: added scfenergies reading for ONIOM case
+        # Example line: " ONIOM: extrapolated energy =   -1381.592818535788"
+        if line[1:27] == "ONIOM: extrapolated energy":
+            if not hasattr(self, "scfenergies"):
+                self.scfenergies = []
+            self.scfenergies.append(utils.convertor(self.float(line.split()[4]), "hartree", "eV"))
+
         # Total energies after Moller-Plesset corrections.
         # Second order correction is always first, so its first occurance
         #   triggers creation of mpenergies (list of lists of energies).

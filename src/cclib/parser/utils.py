@@ -10,7 +10,7 @@
 
 __revision__ = "$Revision$"
 
-from ase import units
+import units
 def convertor(value, fromunits, tounits):
     """Convert from one set of units to another.
 
