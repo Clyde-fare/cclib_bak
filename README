@@ -3,3 +3,7 @@ This is the chemical notebook adapted version of cclib. For the official version
 http://cclib.sourceforge.net/wiki/index.php/Main_Page 
 
 This version is in general less updated than the official one and uses a different set of units.
+
+CClib is distributed as open source software under the conditions of the LGPL
+version 2.1 license. Read the file LICENSE for more details, or visit
+http://www.gnu.org/licenses/
