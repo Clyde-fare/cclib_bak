@@ -725,7 +725,14 @@ class Gaussian(logfileparser.Logfile):
                 
                     if not hasattr(self, 'vibirs'):
                         self.vibirs = []
-                    irs = [self.float(f) for f in line[15:].split()]
+#                    irs = [self.float(f) for f in line[15:].split()]
+                    irs = []
+                    for ir in line[15:].split():
+                        try:
+                            irs.append(self.float(ir))
+                        except ValueError:
+                            irs.append(self.float('nan'))
+
                     self.vibirs.extend(irs)
 
                 if line[1:15] == "Raman Activ --":
